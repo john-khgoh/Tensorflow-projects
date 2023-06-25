@@ -76,6 +76,7 @@ dense_layer = [24,12,1]
 #Keep the columns of interest
 series = lax_df[['LAX_Delayed','LAX_Cancelled']]
 series_valid_copy = series[split_time:]
+no_of_cols = series.shape[1]
 
 #Store the means and standard deviations for denormalization
 list_of_means = list(series.mean())
@@ -124,7 +125,7 @@ def window(series,window_size,shuffle_buffer,batch_size):
 dataset = window(series_train,window_size,shuffle_buffer,batch_size)
 ''' 
 model = tf.keras.models.Sequential([ 
-        tf.keras.layers.Conv1D(filters=conv_layer_filters,kernel_size=5,strides=1,activation='relu',input_shape=[None,2]),
+        tf.keras.layers.Conv1D(filters=conv_layer_filters,kernel_size=5,strides=1,activation='relu',input_shape=[None,no_of_cols]),
         tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(lstm_layer,return_sequences=True)),
         tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(lstm_layer)),
         tf.keras.layers.Dense(dense_layer[0],activation='relu'),
