@@ -11,7 +11,6 @@ import matplotlib.pyplot as plt
 
 np.set_printoptions(threshold=sys.maxsize)
 
-wwd = os.path.dirname('C:\\Users\\johnk\\Documents\\Project_2018\\34_Tensorflow_certification\\')
 cwd = os.getcwd()
 checkpoint_filepath = cwd + '\\checkpoint\\'
 
@@ -39,7 +38,7 @@ def prepare(ds, shuffle=False):
 
 train_ds = prepare(train_ds)
 test_ds = prepare(test_ds)
-local_weight_file = wwd + '\\inception_v3_weights_tf_dim_ordering_tf_kernels_notop.h5'
+local_weight_file = cwd + '\\inception_v3_weights_tf_dim_ordering_tf_kernels_notop.h5'
 
 pre_trained_model = InceptionV3(input_shape=(150,150,3),
                                 include_top=False,
